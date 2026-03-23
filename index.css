@@ -1,0 +1,215 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+:root {
+  --gold: rgb(255, 208, 0);
+  --font-size: 1.75vw;
+  --inputs-width:10vw;
+}
+
+html{
+    width: 100vw;
+}
+body{
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+.bg {
+  position: fixed;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+}
+main {
+  width: 100vw;
+  padding: 5vh 5vw;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+}
+h1 {
+  color: white;
+  font-size: calc(var(--font-size) * 4);
+  font-weight: 400;
+}
+h1 span {
+  color: var(--gold);
+}
+h2 {
+  color: white;
+  font-size: calc(var(--font-size) * 1.5);
+  margin-bottom: 10vh;
+  font-weight: 400;
+}
+h3 {
+  font-size: calc(var(--font-size) * 1.5);
+  color: var(--gold);
+  margin-bottom: 5vh;
+}
+span.highlight {
+  color: var(--gold);
+}
+p,
+ul {
+  font-size: calc(var(--font-size) * 1);
+  margin-bottom: 5vh;
+}
+ul {
+  list-style: none;
+}
+ul li::before {
+  content: "- ";
+}
+.text {
+  color: white;
+  width: 90vw;
+}
+form,
+#localiz_ar {
+  color: white;
+  display: flex;
+  width: 90vw;
+  align-items: center;
+  flex-direction: column;
+}
+
+#localiz_ar label {
+  font-size: calc(var(--font-size) * 1.5);
+}
+#localiz_ar select,
+#localiz_ar input:not(.localiz_ar_parent input) {
+  font-size: calc(var(--font-size) * 1);
+  margin-bottom: 5vh;
+  width: calc(var(--inputs-width) * 4);
+  padding: 1vh 0;
+}
+
+#localiz_ar .localiz_ar_parent {
+  margin-bottom: 5vh;
+}
+
+#localiz_ar .localiz_ar_parent input {
+  font-size: calc(var(--font-size) * 1);
+  width: calc(var(--inputs-width) * 4);
+  padding: 1vh 0;
+}
+
+#localiz_ar label {
+  color: var(--gold);
+  margin-bottom: 1vh;
+}
+
+.localiz_ar_dropdown {
+  z-index: 3;
+}
+
+.localiz_ar_dropdown .localiz_ar_option, .localiz_ar_dropdown .localiz_ar_no_results {
+  color: black;
+  font-size: calc(var(--font-size) * 1);
+}
+
+#submit {
+  margin-top: 5vh;
+  font-size: calc(var(--font-size) * 1.5);
+  width: calc(var(--inputs-width) * 2);
+  background-color: var(--gold);
+  color: black;
+  border: 2px solid black;
+  border-radius: 50px;
+  padding: 1vh 0;
+  font-weight: bold;
+  cursor: pointer;
+}
+#submit:hover {
+  background-color: black;
+  color: var(--gold);
+  border: 2px solid var(--gold);
+}
+.result {
+  margin-top: 5vh;
+  width: 60vw;
+  padding: 5vh 0;
+}
+/* From Uiverse.io by aguerquin */
+
+.button-icon {
+  margin-top: 5vh;
+  display: flex;
+  border: 3px #fff solid;
+  width: fit-content;
+  height: fit-content;
+  cursor: pointer;
+}
+
+.icon {
+  background-color: #fff;
+  padding: 10px 10px 5px 10px;
+}
+
+.icon svg {
+  width: 25px;
+  height: 25px;
+}
+
+.cube {
+  transition: all 0.4s;
+  transform-style: preserve-3d;
+  width: 200px;
+  height: 20px;
+}
+
+.button-icon:hover {
+  border-color: #ff98a2;
+}
+
+.button-icon:hover .cube {
+  transform: rotateX(90deg);
+}
+
+.side {
+  position: absolute;
+  height: 47px;
+  width: 200px;
+  display: flex;
+  font-size: 0.8em;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: bold;
+}
+
+.top {
+  background: #ff98a2;
+  color: #fff;
+  transform: rotateX(-90deg) translate3d(0, 13.5px, 2em);
+}
+
+.front {
+  background: #222229;
+  color: #fff;
+  transform: translate3d(0, 0, 1em);
+}
+
+@media (max-width:720px) {
+    :root{
+        --font-size:5vw;
+        --inputs-width:20vw;
+    }
+    #submit{
+        width: calc(var(--inputs-width) * 4);
+    }
+    .result{
+        width: 80vw;
+    }
+}

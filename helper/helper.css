@@ -1,0 +1,64 @@
+body{
+    margin: 0;
+}
+
+.localiz_ar_forbidden{
+    cursor: not-allowed;
+}
+
+.localiz_ar_parent{
+    background-color: orange;
+    display: inline-block;
+    position: relative;
+    height: 100%;
+}
+
+
+.localiz_ar_dropdown{
+    position:absolute;
+    display: inline-block;
+    width: 100%;
+    left: 0%;
+    top: 100%;
+}
+
+.localiz_ar_dropdown .localiz_ar_option{
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid black;
+    border-bottom: 0px;
+}
+
+.localiz_ar_dropdown .localiz_ar_no_results{
+    cursor: not-allowed;
+    position: relative;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid black;
+    border-bottom: 0px;
+}
+
+.localiz_ar_option:hover{
+    background-color: rgb(200,200,200);
+}
+
+.localiz_ar_dropdown .localiz_ar_option:nth-child(1) {
+    border-top: 0px;
+}
+.localiz_ar_dropdown .localiz_ar_option:nth-last-child(1) {
+    border-bottom: 1px solid black;
+}
+
+.localiz_ar_error{
+    border: 2px solid red;
+}
