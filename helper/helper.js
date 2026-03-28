@@ -2,6 +2,16 @@ const localiz_ar = {
 
     localiz_ar_cities_focus: false,
 
+    removeTicks(str) {
+        return str
+            .replace(/ñ/g, "__enie__")
+            .replace(/Ñ/g, "__ENIE__")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/__enie__/g, "ñ")
+            .replace(/__ENIE__/g, "Ñ");
+    },
+
     getWeekVersion() {
         const now = new Date();
 
@@ -41,13 +51,14 @@ const localiz_ar = {
 
         for (let pos in value) {
             const char = value[pos].toLowerCase()
+            const formattedChar = localiz_ar.removeTicks(char)
             if (char === " ") {
                 word = ""
                 continue
             }
 
             if (pos === "0") {
-                const ids = options[char]
+                const ids = options[formattedChar]
 
                 if (!ids) return [[], {}]
 
@@ -60,7 +71,7 @@ const localiz_ar = {
 
             //if it´s the first char of a word but not the zero char
             else if (word === "") {
-                const ids = options[char]
+                const ids = options[formattedChar]
 
                 if (!ids) return [[], {}]
 
@@ -89,7 +100,7 @@ const localiz_ar = {
 
                 for (const [id, posInString] of matches) {
                     const str = options["_" + id]
-                    if (str[posInString + 1] === char) {
+                    if (localiz_ar.removeTicks(str[posInString + 1]) === formattedChar) {
                         newMatches.push([id, posInString + 1])
                         newMatchesList[id] = [posInString - (matchesList[id][1] - matchesList[id][0]), posInString + 1]
                     }
