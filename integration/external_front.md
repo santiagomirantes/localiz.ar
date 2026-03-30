@@ -61,6 +61,7 @@ El método `localiz_ar.start()` recibe como único párametro un objeto `config`
 | -------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `parent`       | `Node` (default = `null`)                                | el elemento padre del formulario, donde se van a crear los inputs automáticos. Obligatorio a menos que `avoid_parent` sea `true`                                                                                                                                                                                                |
 | `avoid_parent` | `Boolean` (default = `false`)                            | si es `true`, evita que la propiedad `parent` sea necesaria (tener en cuenta que si `parent` es `null` todos los inputs deben ser creados y dados manualmente)                                                                                                                                                                  |
+| `max`          | `Number` (default = `5`)                                 | Indicá la cantidad máxima de resultados a mostrar en los inputs de Ciudades (`cities`) y Calles (`streets`)                                                                                                                                                                                                                     |
 | `exclude`      | [Objeto de inputs](#objeto-de-inputs) (default = `null`) | define los inputs que se tienen que excluir en la verificación. La verificación es en cascada según especificidad. Es decir, por ejemplo, si se excluye el campo de 'Calles' (`streets`), el formulario tampoco incluirá los campos de 'Número de calle' (`number`) y 'Piso' (`floor`)                                          |
 | `inputs`       | [Objeto de inputs](#objeto-de-inputs) (default = `null`) | permite dar inputs ya presentes en el documento para que tomen el rol de un campo y así evitar que se generen automáticamente. Los inputs de los campos 'Ciudades' (`cities`) y 'Calles' (`streets`) deben estar encapsulados en un `div` para que la lista de resultados de busqueda (el `dropdown`) se pueda añadir al padre. |
 | `labels`       | [Objeto de inputs](#objeto-de-inputs) (default = `null`) | permite definir los [labels](https://developer.mozilla.org/es/docs/Web/HTML/Reference/Elements/label) atribuidos a cada input.                                                                                                                                                                                                  |
@@ -98,26 +99,26 @@ const config = {
 
   exclude: {
     number: true, // no se pide número de calle y, por lo tanto, tampoco piso
-    license: false // se mantiene la licencia visible
+    license: false, // se mantiene la licencia visible
   },
 
   inputs: {
     provs: document.getElementById("provincia"),
     cities: document.getElementById("ciudad"), // el input debe tener un div como padre
-    streets: document.getElementById("calle") // el input debe tener un div como padre
+    streets: document.getElementById("calle"), // el input debe tener un div como padre
   },
 
   labels: {
     provs: "Provincia",
     cities: "Ciudad",
-    streets: "Calle"
+    streets: "Calle",
   },
 
   placeholders: {
     provs: "Seleccioná una provincia",
     cities: "Ingresá una ciudad",
-    streets: "Ingresá una calle"
-  }
+    streets: "Ingresá una calle",
+  },
 };
 
 localiz_ar.start(config);

@@ -121,7 +121,11 @@ const localiz_ar = {
 
     },
 
-    show_matches(matches, matchesList, input, dropdown, options) {
+    show_matches(matches, matchesList, input, dropdown, options, max = 5) {
+
+        if (isNaN(parseInt(max)) || max <= 0) {
+            max = 5
+        }
 
         dropdown.innerHTML = ""
 
@@ -134,8 +138,11 @@ const localiz_ar = {
         }
 
         const list = {}
+        let count = 0
 
         for (const [id, posInString] of matches) {
+
+            if(count >= max) continue
 
             const firstPos = matchesList[id][0]
             const lastPos = matchesList[id][1]
@@ -143,6 +150,7 @@ const localiz_ar = {
             if (lastPos !== posInString) continue
 
             if (!list[id]) {
+                count++
                 const p = document.createElement("p")
                 list[id] = p
                 p.innerHTML = options["_" + id]
@@ -542,7 +550,8 @@ const localiz_ar = {
                     cities_matchesList,
                     city.input,
                     city.dropdown,
-                    cities_options
+                    cities_options,
+                    config.max
                 )
             }
 
@@ -623,7 +632,8 @@ const localiz_ar = {
                     streets_matchesList,
                     street.input,
                     street.dropdown,
-                    streets_options
+                    streets_options,
+                    config.max
                 )
             }
 
