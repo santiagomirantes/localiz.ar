@@ -1,6 +1,10 @@
 async function fn() {
     const data = await localiz_ar.start({
-        parent:document.querySelector("#localiz_ar")
+        parent:document.querySelector("#localiz_ar"),
+        filter:{
+            streets:{
+            }
+        }
     })
     const result = document.querySelector("#result code")
     document.querySelector("#submit").onclick = ev => {

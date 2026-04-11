@@ -41,9 +41,10 @@ const localiz_ar = {
         return `${weekStr}-${year}`;
     },
 
-    get_matches(value, options) {
+    get_matches(value, options, filter) {
 
         if (!value) return [[], {}]
+        let doFilter = typeof filter === "object"
 
         let word = ""
         let matches = []
@@ -62,9 +63,13 @@ const localiz_ar = {
 
                 if (!ids) return [[], {}]
 
-                matches = ids
+                matches = []
 
-                for (const [id, posInString] of matches) {
+                for (const [id, posInString] of ids) {
+                    if(doFilter) {
+                        if(!filter[id]) continue
+                    }
+                    matches.push([id,posInString])
                     matchesList[id] = [posInString, posInString]
                 }
             }
@@ -431,6 +436,9 @@ const localiz_ar = {
         prov.select.innerHTML = `<option value='null'>${config.placeholders?.provs || "Elija su provincia"}</option>`
 
         for (const [provID, provName] of provs) {
+            if(config.filter?.provs) {
+                if(!config.filter.provs[provID]) continue
+            }
             const option = document.createElement("option")
             option.value = provID
             option.textContent = provName
@@ -487,6 +495,15 @@ const localiz_ar = {
                 city.input.readOnly = true
                 city.input.value = "Cargando..."
 
+                if(select_value === "3082668") {
+                    city.label.textContent = config.labels?.caba || "Barrio:"
+                    city.input.placeholder = config.placeholders?.caba || ""
+                }
+                else{
+                    city.label.textContent = config.labels?.cities || "Ciudad:"
+                    city.input.placeholder = config.placeholders?.cities || ""
+                }
+
                 if (!config.exclude?.streets) {
 
                     street.input.className = "localiz_ar_streets localiz_ar_forbidden"
@@ -542,7 +559,8 @@ const localiz_ar = {
 
                 [cities_matches, cities_matchesList] = localiz_ar.get_matches(
                     city.input.value,
-                    cities_options
+                    cities_options,
+                    config.filter?.cities?.[select_value]
                 )
 
                 localiz_ar.show_matches(
@@ -624,7 +642,8 @@ const localiz_ar = {
 
                 ;[streets_matches, streets_matchesList] = localiz_ar.get_matches(
                     street.input.value,
-                    streets_options
+                    streets_options,
+                    config.filter?.streets?.[select_value]?.[city.input.getAttribute("_id")]
                 )
 
                 localiz_ar.show_matches(
